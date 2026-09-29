@@ -1,0 +1,22 @@
+{
+  "name": "backend-b",
+  "version": "1.0.0",
+  "description": "Backend Server B for Computer Networks Course Project - Private Network Service Platform",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "networking",
+    "backend",
+    "http",
+    "load-balancing",
+    "course-project"
+  ],
+  "author": "Private Network Service Platform Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

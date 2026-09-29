@@ -1,0 +1,61 @@
+# ==============================================================================
+# Machine 1: dnsmasq Configuration Template
+# Computer Networks Course Project - Private Network Service Platform
+#
+# IMPORTANT NOTICE:
+# The IP addresses and network interfaces specified below are EXAMPLE values
+# corresponding to the course project network layout.
+# If your machine's physical network interface or assigned IP addresses change,
+# you MUST update these values accordingly.
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. Network Interface & Binding Configuration
+# ------------------------------------------------------------------------------
+# Specify the network interface to listen on.
+# On macOS, check your active Wi-Fi / Ethernet interface using:
+#   ifconfig | grep -B 2 "status: active"   (commonly en0, en1, etc.)
+interface=en0
+
+# Listen addresses:
+# - 127.0.0.1: Allows local queries on Machine 1
+# - 10.7.11.22: The private network IP of Machine 1 accessible by other nodes
+# [CHANGE THIS if Machine 1 IP changes]
+listen-address=127.0.0.1,10.7.11.22
+
+# Bind only to the specified interfaces rather than wildcard 0.0.0.0
+bind-interfaces
+
+# Do not read /etc/resolv.conf to prevent external DNS leaks in this private lab
+no-resolv
+
+# Do not poll /etc/resolv.conf for changes
+no-poll
+
+# ------------------------------------------------------------------------------
+# 2. Authoritative DNS Records for the Private Domain (.test TLD)
+# ------------------------------------------------------------------------------
+# Syntax: address=/<domain-name>/<ip-address>
+# Both domain names resolve to Machine 2 (nginx Edge / Reverse Proxy)
+
+# Primary application domain -> Machine 2 Edge Proxy
+# [CHANGE 10.7.12.181 if Machine 2 IP changes]
+address=/app.team1.test/10.7.12.181
+
+# API gateway domain -> Machine 2 Edge Proxy
+# [CHANGE 10.7.12.181 if Machine 2 IP changes]
+address=/api.team1.test/10.7.12.181
+
+# Optional: Reverse lookup pointer (PTR) records
+ptr-record=181.12.7.10.in-addr.arpa,app.team1.test
+
+# ------------------------------------------------------------------------------
+# 3. DNS Cache & Query Logging Settings
+# ------------------------------------------------------------------------------
+# Size of the DNS lookup cache
+cache-size=1000
+
+# Enable query logging for Wireshark and debugging verification
+# Set to 'log-queries' to inspect every incoming DNS lookup
+log-queries
+log-facility=/var/log/dnsmasq.log
