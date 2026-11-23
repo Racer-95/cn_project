@@ -1,0 +1,89 @@
+PRIVATE NETWORK PROJECT - TEST REPORT
+Date: Tue Nov 24 01:46:01 IST 2026
+
+===== NETWORK CONFIGURATION =====
+	inet6 fe80::44e:bef0:8859:ec43%en0 prefixlen 64 secured scopeid 0xb 
+	inet 10.7.25.205 netmask 0xffffe000 broadcast 10.7.31.255
+
+===== DNS TEST =====
+
+; <<>> DiG 9.10.6 <<>> @10.7.25.205 app.team.test +noall +answer
+; (1 server found)
+;; global options: +cmd
+app.team.test.		0	IN	A	10.7.3.166
+
+; <<>> DiG 9.10.6 <<>> @10.7.25.205 api.team.test +noall +answer
+; (1 server found)
+;; global options: +cmd
+api.team.test.		0	IN	A	10.7.3.166
+
+===== BACKEND A =====
+{
+  "message": "Hello from Backend A",
+  "server": "Backend A",
+  "ip": "10.7.23.156",
+  "port": 3001,
+  "path": "/",
+  "timestamp": "2026-11-23T20:16:02.079Z"
+}
+===== BACKEND B =====
+{
+  "message": "Hello from Backend B",
+  "server": "Backend B",
+  "ip": "10.7.12.181",
+  "port": 3002,
+  "path": "/",
+  "timestamp": "2026-11-23T20:16:02.128Z"
+}
+===== HTTPS LOAD BALANCER =====
+{
+  "message": "Hello from Backend B",
+  "server": "Backend B",
+  "ip": "10.7.12.181",
+  "port": 3002,
+  "path": "/",
+  "timestamp": "2026-11-23T20:16:02.348Z"
+}
+{
+  "message": "Hello from Backend A",
+  "server": "Backend A",
+  "ip": "10.7.23.156",
+  "port": 3001,
+  "path": "/",
+  "timestamp": "2026-11-23T20:16:02.474Z"
+}
+{
+  "message": "Hello from Backend B",
+  "server": "Backend B",
+  "ip": "10.7.12.181",
+  "port": 3002,
+  "path": "/",
+  "timestamp": "2026-11-23T20:16:02.540Z"
+}
+{
+  "message": "Hello from Backend A",
+  "server": "Backend A",
+  "ip": "10.7.23.156",
+  "port": 3001,
+  "path": "/",
+  "timestamp": "2026-11-23T20:16:02.601Z"
+}
+{
+  "message": "Hello from Backend B",
+  "server": "Backend B",
+  "ip": "10.7.12.181",
+  "port": 3002,
+  "path": "/",
+  "timestamp": "2026-11-23T20:16:02.656Z"
+}
+{
+  "message": "Hello from Backend A",
+  "server": "Backend A",
+  "ip": "10.7.23.156",
+  "port": 3001,
+  "path": "/",
+  "timestamp": "2026-11-23T20:16:02.730Z"
+}
+
+===== CAPTURE FILE =====
+-rw-r--r--  1 root  staff   1.6M 24 Nov 01:46 evidence/dns-tls-capture.pcap
